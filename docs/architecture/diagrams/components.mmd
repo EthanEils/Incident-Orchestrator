@@ -1,0 +1,15 @@
+flowchart TD
+  UI(Web UI)
+  API(API)
+  DB["(SQL)"]
+  SB((Service Bus))
+  DF(Durable Functions)
+  ACS(Azure Communication Services)
+  Graph(Microsoft Graph)
+
+  UI --> API
+  API --> DB
+  API --> SB
+  SB --> DF
+  DF --> ACS
+  DF --> Graph
