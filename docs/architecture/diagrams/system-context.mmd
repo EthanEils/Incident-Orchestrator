@@ -1,0 +1,8 @@
+flowchart LR
+    User((User))
+    API --> SQL["(Azure SQL)"]
+    API --> SB((Service Bus))
+    SB --> Orchestrator
+    Orchestrator --> ACS(Azure Communication Services)
+    User --> Teams
+    Teams --> API
