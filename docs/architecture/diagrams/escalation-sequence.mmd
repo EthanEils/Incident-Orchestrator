@@ -1,0 +1,20 @@
+sequenceDiagram
+  participant API
+  participant SB as ServiceBus
+  participant DF as DurableFunction
+  participant ACS
+  participant Teams
+  participant User
+
+  API->>SB: Publish IncidentCreated
+  SB->>DF: Start Orchestration
+  DF->>ACS: Send initial notification
+  DF->>Teams: Post Teams card
+
+  alt Ack
+    User->>Teams: ACK
+    Teams->>API: ACK callback
+    API->>DF: RaiseExternalEvent("ack")
+  else Timeout
+    DF->>ACS: Escalate
+  end
